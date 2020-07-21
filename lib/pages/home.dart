@@ -10,7 +10,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context).settings.arguments;
+    data = data.isNotEmpty ? data : ModalRoute.of(context).settings.arguments;
 
     String bgImage = data['isDaytime'] ? 'assets/day.png' : 'assets/night.png';
     Color bgColor = data['isDaytime'] ? Colors.blue : Colors.indigo[700];
@@ -36,14 +36,25 @@ class _HomeState extends State<Home> {
                   color: Colors.grey[300],
                   size: 30,
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, '/location');
+                onPressed: () async {
+                  dynamic result = await Navigator.pushNamed(context, '/location');
+                  if(result != null){
+                    setState(() {
+                      data = {
+                        'time': result['time'],
+                        'location': result['location'],
+                        'isDaytime': result['isDaytime'],
+                        'flag': result['flag']
+                      };
+                    });
+                  }
                 },
                 label: Text(
                   'Edit Location',
                   style: TextStyle(
                     fontSize: 17,
-                    letterSpacing: 1.4
+                    letterSpacing: 1.4,
+                    color: Colors.grey[300]
                   ),
                 ),
               ),
@@ -55,7 +66,8 @@ class _HomeState extends State<Home> {
                     data['location'],
                       style: TextStyle(
                         letterSpacing: 2.0,
-                        fontSize: 28.0
+                        fontSize: 28.0,
+                        color: Colors.white
                       )
                   ),
                 ],
@@ -64,7 +76,8 @@ class _HomeState extends State<Home> {
               Text(
                 data['time'],
                 style: TextStyle(
-                  fontSize: 60.0
+                  fontSize: 60.0,
+                  color: Colors.white
                 )
               )
             ],
