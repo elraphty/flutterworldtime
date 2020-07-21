@@ -31,13 +31,23 @@ class _HomeState extends State<Home> {
           child: Column(
             children: <Widget>[
               FlatButton.icon(
-                icon: Icon(Icons.edit_location),
+                icon: Icon(
+                  Icons.edit_location,
+                  color: Colors.grey[300],
+                  size: 30,
+                ),
                 onPressed: () {
                   Navigator.pushNamed(context, '/location');
                 },
-                label: Text('Edit Location'),
+                label: Text(
+                  'Edit Location',
+                  style: TextStyle(
+                    fontSize: 17,
+                    letterSpacing: 1.4
+                  ),
+                ),
               ),
-              SizedBox(height: 20.0,),
+              SizedBox(height: 30.0,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
