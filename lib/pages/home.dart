@@ -13,10 +13,10 @@ class _HomeState extends State<Home> {
     data = ModalRoute.of(context).settings.arguments;
 
     String bgImage = data['isDaytime'] ? 'assets/day.png' : 'assets/night.png';
-    print(bgImage);
-
+    Color bgColor = data['isDaytime'] ? Colors.blue : Colors.indigo[700];
 
     return Scaffold(
+      backgroundColor: bgColor,
       body: SafeArea(child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
